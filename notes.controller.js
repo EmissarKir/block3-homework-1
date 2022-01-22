@@ -28,7 +28,6 @@ async function updateNote(id, data) {
   await fs.writeFile(notesPath, JSON.stringify(notes));
   console.log(chalk.yellow("Note was updated!"));
 }
-
 async function getNotes() {
   const notes = await fs.readFile(notesPath, { encoding: "utf-8" });
   return Array.isArray(JSON.parse(notes)) ? JSON.parse(notes) : [];

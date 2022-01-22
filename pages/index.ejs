@@ -26,22 +26,47 @@
         <button type="submit" class="btn btn-outline-primary">Create!</button>
       </form>
       <% if ( notes.length > 0 ) { %>
-
       <div class="card">
         <ul class="list-group">
-          <% for (let i = 0; i < notes.length; i++) { %>
+          <% for (let i = 0; i < notes.length; i++) { %> <% if ( notes[i].id ===
+          editId ) { %>
+
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <input
+              type="text"
+              name="title"
+              id="title"
+              required
+              value="<%= notes[i].title%>"
+            />
+            <div>
+              <button
+                class="btn btn-success"
+                type="button"
+                data-type="edit"
+                data-id="<%= notes[i].id  %>"
+              >
+                Сохранить
+              </button>
+              <a role="button" class="btn btn-danger" href="/"> Отменить </a>
+            </div>
+          </li>
+
+          <% } else { %>
           <li
             class="list-group-item d-flex justify-content-between align-items-center"
           >
             <%= notes[i].title %>
             <div>
-              <button
+              <a
+                role="button"
                 class="btn btn-primary"
-                data-type="edit"
-                data-id="<%= notes[i].id  %>"
+                href="<%= notes[i].id  %>"
               >
-                edit
-              </button>
+                Обновить
+              </a>
               <button
                 class="btn btn-danger"
                 data-type="remove"
@@ -51,8 +76,7 @@
               </button>
             </div>
           </li>
-
-          <% } %>
+          <% } %> <% } %>
         </ul>
       </div>
       <% } else { %>
